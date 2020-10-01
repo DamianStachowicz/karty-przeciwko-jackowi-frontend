@@ -1,0 +1,1 @@
+# karty-przeciwko-jackowi-frontend
