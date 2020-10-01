@@ -1,0 +1,7 @@
+{
+  "name": "karty-przeciwko-jackowi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
