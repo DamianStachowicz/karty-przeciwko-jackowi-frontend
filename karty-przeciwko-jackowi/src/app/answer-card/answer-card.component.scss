@@ -1,0 +1,19 @@
+:host {
+  height: 90%;
+  width: 90%;
+
+  .card-container {
+    background-color: white;
+    border-radius: 1rem;
+    color: #222;
+    height: 100%;
+    padding: 2rem;
+    position: relative;
+
+    .footer {
+      bottom: 2rem;
+      font-size: 0.8rem;
+      position: absolute;
+    }
+  }
+}
