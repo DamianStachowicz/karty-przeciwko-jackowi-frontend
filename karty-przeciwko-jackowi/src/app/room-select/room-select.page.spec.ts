@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
-
 import { RoomSelectPage } from './room-select.page';
 
 describe('RoomSelectPage', () => {
@@ -10,7 +10,10 @@ describe('RoomSelectPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RoomSelectPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [
+        HttpClientModule,
+        IonicModule.forRoot()
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RoomSelectPage);
