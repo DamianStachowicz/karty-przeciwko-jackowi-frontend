@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Wybierz kartę</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-slides>
+   <ion-slide *ngFor="let card of cards">
+    <app-answer-card [card]="card" (click)="select(card)"></app-answer-card>
+   </ion-slide>
+ </ion-slides>
+</ion-content>
