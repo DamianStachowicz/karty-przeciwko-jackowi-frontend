@@ -1,0 +1,8 @@
+<div class="card-container"
+  [ngClass]="{
+    'card-question': card.type === 'question',
+    'card-answer': card.type === 'answer'
+  }">
+  <div class="text">{{ card?.text }}</div>
+  <div class="footer">&#9824; Karty Przeciwko Jackowi</div>
+</div>

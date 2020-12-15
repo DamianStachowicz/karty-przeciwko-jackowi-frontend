@@ -7,7 +7,7 @@
 <ion-content>
  <ion-slides>
    <ion-slide *ngFor="let card of cards">
-    <app-answer-card [card]="card" (click)="select(card)"></app-answer-card>
+    <app-card [card]="card" (click)="select(card)"></app-card>
    </ion-slide>
  </ion-slides>
 </ion-content>

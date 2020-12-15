@@ -1,11 +1,11 @@
 :host {
+  display: block;
   height: 90%;
   width: 90%;
 
   .card-container {
-    background-color: white;
+    border: 1px solid;
     border-radius: 1rem;
-    color: #222;
     height: 100%;
     padding: 2rem;
     position: relative;
@@ -15,5 +15,17 @@
       font-size: 0.8rem;
       position: absolute;
     }
+  }
+
+  .card-question {
+    background-color: black;
+    border-color: white;
+    color: white;
+  }
+
+  .card-answer {
+    background-color: white;
+    border-color: black;
+    color: #222;
   }
 }

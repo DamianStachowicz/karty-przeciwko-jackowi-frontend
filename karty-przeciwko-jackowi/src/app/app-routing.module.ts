@@ -3,6 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',  redirectTo: '/current-question', pathMatch: 'full'
+  },
+  {
     path: 'room-select',
     loadChildren: () =>
       import('./room-select/room-select.module').then(
@@ -14,8 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./card-select/card-select.module').then( m => m.CardSelectPageModule)
   },
   {
-    path: '',  redirectTo: '/card-select', pathMatch: 'full'
+    path: 'current-question',
+    loadChildren: () => import('./current-question/current-question.module').then( m => m.CurrentQuestionPageModule)
   }
+
 ];
 @NgModule({
   imports: [
