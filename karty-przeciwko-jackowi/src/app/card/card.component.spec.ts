@@ -1,28 +1,29 @@
-import { AnswerCardComponent } from './answer-card.component';
+import { CardComponent } from './card.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Card } from '../interfaces/card.interface';
 import { DebugElement } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
-describe('AnswerCardComponent', () => {
+describe('CardComponent', () => {
   const card: Card = {
     id: 0,
-    text: 'Pudel Ciastek'
+    text: 'Pudel Ciastek',
+    type: 'answer'
   };
 
-  let component: AnswerCardComponent;
-  let fixture: ComponentFixture<AnswerCardComponent>;
+  let component: CardComponent;
+  let fixture: ComponentFixture<CardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnswerCardComponent ],
+      declarations: [ CardComponent ],
       imports: [
         IonicModule.forRoot()
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AnswerCardComponent);
+    fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
     component.card = card;
     fixture.detectChanges();

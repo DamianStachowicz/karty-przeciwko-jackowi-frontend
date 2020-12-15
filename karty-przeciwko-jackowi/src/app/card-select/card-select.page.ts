@@ -9,13 +9,16 @@ import { Card } from '../interfaces/card.interface';
 export class CardSelectPage implements OnInit {
   cards: Card[] = [{
     id: 0,
-    text: 'Pudel Ciastek'
+    text: 'Pudel Ciastek',
+    type: 'answer'
   }, {
     id: 1,
-    text: 'Karty Przeciwko Jackowi'
+    text: 'Karty Przeciwko Jackowi',
+    type: 'answer'
   }, {
     id: 2,
-    text: 'Sucha ryba'
+    text: 'Sucha ryba',
+    type: 'answer'
   }];
 
   constructor() { }

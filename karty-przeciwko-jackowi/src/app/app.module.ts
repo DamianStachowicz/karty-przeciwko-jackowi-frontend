@@ -1,8 +1,10 @@
+import { CardComponent } from './card/card.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardSelectPage } from './card-select/card-select.page';
 import { CardSelectPageModule } from './card-select/card-select.module';
+import { CurrentQuestionPageModule } from './current-question/current-question.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -11,7 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [
     CardSelectPage
   ],
@@ -20,7 +24,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    CardSelectPageModule
+    CardSelectPageModule,
+    CurrentQuestionPageModule
   ],
   providers: [
     StatusBar,

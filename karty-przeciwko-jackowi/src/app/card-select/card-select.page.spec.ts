@@ -1,7 +1,7 @@
-import { AnswerCardComponent } from '../answer-card/answer-card.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Card } from '../interfaces/card.interface';
+import { CardComponent } from '../card/card.component';
 import { CardSelectPage } from './card-select.page';
 import { DebugElement } from '@angular/core';
 import { IonicModule, IonSlides } from '@ionic/angular';
@@ -9,13 +9,16 @@ import { IonicModule, IonSlides } from '@ionic/angular';
 describe('CardSelectPage', () => {
   const cards: Card[] = [{
     id: 0,
-    text: 'Pudel Ciastek'
+    text: 'Pudel Ciastek',
+    type: 'answer'
   }, {
     id: 1,
-    text: 'Karty Przeciwko Jackowi'
+    text: 'Karty Przeciwko Jackowi',
+    type: 'answer'
   }, {
     id: 2,
-    text: 'Sucha ryba'
+    text: 'Sucha ryba',
+    type: 'answer'
   }];
 
   let component: CardSelectPage;
@@ -25,7 +28,7 @@ describe('CardSelectPage', () => {
     TestBed.configureTestingModule({
       declarations: [
         CardSelectPage,
-        AnswerCardComponent
+        CardComponent
       ],
       imports: [
         IonicModule.forRoot()
