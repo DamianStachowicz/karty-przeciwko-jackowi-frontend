@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: 'room-select',
     loadChildren: () =>
-      import('./room-select/room-select.module').then(
+      import('./pages/room-select/room-select.module').then(
         (m) => m.RoomSelectPageModule
       ),
   },
   {
     path: 'card-select',
-    loadChildren: () => import('./card-select/card-select.module').then( m => m.CardSelectPageModule)
+    loadChildren: () => import('./pages/card-select/card-select.module').then( m => m.CardSelectPageModule)
   },
   {
     path: 'current-question',
-    loadChildren: () => import('./current-question/current-question.module').then( m => m.CurrentQuestionPageModule)
+    loadChildren: () => import('./pages/current-question/current-question.module').then( m => m.CurrentQuestionPageModule)
   }
 
 ];
