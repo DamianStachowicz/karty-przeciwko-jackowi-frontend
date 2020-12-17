@@ -1,3 +1,13 @@
 app-card {
-  margin: 5% auto;
+  height: 90%;
+  left: 5%;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transition: top 0.7s;
+  width: 90%;
+}
+
+.top {
+  top: 5%;
 }

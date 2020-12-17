@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-players-list></app-players-list>
-  <app-card [card]="card"></app-card>
+<ion-content [scrollX]="false" [scrollY]="false">
+  <app-players-list [players]="players"></app-players-list>
+  <app-card [card]="questionCard" tappable (click)="questionCardTop = !questionCardTop" [ngClass]="{ 'top': questionCardTop }"></app-card>
 </ion-content>
