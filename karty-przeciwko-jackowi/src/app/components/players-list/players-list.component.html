@@ -1,0 +1,8 @@
+<div class="player-list-container">
+  <div *ngFor="let player of players" class="player" [ngClass]="{ active: player.isActive }">
+    <div class="name">{{ player.name }}</div>
+    <div class="card" *ngIf="player.playedCardId != null"><span class="icon"></span></div>
+    <app-spinner *ngIf="player.playedCardId == null"></app-spinner>
+    <div class="points">{{ player.points }}</div>
+  </div>
+</div>

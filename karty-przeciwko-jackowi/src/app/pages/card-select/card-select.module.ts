@@ -1,7 +1,7 @@
+import { CardSelectPage } from './card-select.page';
+import { CardSelectPageRoutingModule } from './card-select-routing.module';
 import { CommonModule } from '@angular/common';
-import { ComponentsModule } from '../components.module';
-import { CurrentQuestionPage } from './current-question.page';
-import { CurrentQuestionPageRoutingModule } from './current-question-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -11,11 +11,11 @@ import { NgModule } from '@angular/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    CurrentQuestionPageRoutingModule,
+    CardSelectPageRoutingModule,
     ComponentsModule
   ],
   declarations: [
-    CurrentQuestionPage
+    CardSelectPage
   ]
 })
-export class CurrentQuestionPageModule {}
+export class CardSelectPageModule {}

@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { RoomSelectPageRoutingModule } from './room-select-routing.module';
-
+import { NgModule } from '@angular/core';
 import { RoomSelectPage } from './room-select.page';
+import { RoomSelectPageRoutingModule } from './room-select-routing.module';
 
 @NgModule({
   imports: [

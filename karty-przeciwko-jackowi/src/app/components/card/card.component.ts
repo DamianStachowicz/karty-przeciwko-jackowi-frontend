@@ -1,5 +1,5 @@
+import { Card } from '../../interfaces/card.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import { Card } from '../interfaces/card.interface';
 
 @Component({
   selector: 'app-card',

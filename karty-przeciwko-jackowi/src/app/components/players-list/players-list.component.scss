@@ -1,0 +1,38 @@
+.player-list-container {
+  color: white;
+  margin: 1em;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+  padding: 0.2em;
+
+  .name {
+    width: 100%;
+  }
+
+  .card {
+    text-align: center;
+    width: 100%;
+
+    .icon {
+      background-color: white;
+      border: 2px solid #333;
+      border-radius: 0.2rem;
+      color: #333;
+      display: inline-block;
+      height: 1em;
+      width: 0.7em;
+    }
+  }
+
+  .points {
+    text-align: right;
+    width: 100%;
+  }
+}
+
+.active {
+  background-color: #335555;
+}
