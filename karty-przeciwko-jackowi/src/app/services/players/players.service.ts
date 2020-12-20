@@ -38,6 +38,7 @@ export class PlayersService {
     isActive: false,
     playedCardId: 2
   }];
+  private thisPlayer: Player = this.mock[2];
 
   constructor(private httpClient: HttpClient) {}
 
@@ -49,5 +50,9 @@ export class PlayersService {
       }, 700);
     });
     // return this.httpClient.get<Player[]>('');
+  }
+
+  getThisPlayer(): Player {
+    return this.thisPlayer;
   }
 }

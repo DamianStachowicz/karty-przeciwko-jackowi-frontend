@@ -3,9 +3,15 @@ app-card {
   left: 5%;
   position: absolute;
   right: 5%;
-  top: 50%;
+  top: 33%;
   transition: top 0.7s;
   width: 90%;
+}
+
+app-players-list {
+  display: block;
+  max-height: 33%;
+  overflow-y: scroll;
 }
 
 .top {
