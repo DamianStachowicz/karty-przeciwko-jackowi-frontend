@@ -3,20 +3,25 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PlayersListComponent } from './players-list/players-list.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { CardSelectComponent } from './card-select/card-select.page';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule.forRoot(),
   ],
   declarations: [
     CardComponent,
     PlayersListComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CardSelectComponent
   ],
   exports: [
     CardComponent,
     PlayersListComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CardSelectComponent
   ]
 })
 export class ComponentsModule {}

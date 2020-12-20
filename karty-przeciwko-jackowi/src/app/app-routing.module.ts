@@ -13,10 +13,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'card-select',
-    loadChildren: () => import('./pages/card-select/card-select.module').then( m => m.CardSelectPageModule)
-  },
-  {
     path: 'current-question',
     loadChildren: () => import('./pages/current-question/current-question.module').then( m => m.CurrentQuestionPageModule)
   }
