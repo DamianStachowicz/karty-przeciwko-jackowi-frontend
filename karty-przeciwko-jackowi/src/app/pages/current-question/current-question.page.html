@@ -6,5 +6,18 @@
 
 <ion-content [scrollX]="false" [scrollY]="false">
   <app-players-list [players]="players"></app-players-list>
-  <app-card [card]="questionCard" tappable (click)="questionCardTop = !questionCardTop" [ngClass]="{ 'top': questionCardTop }"></app-card>
+  <app-card
+    [card]="questionCard"
+    tappable
+    (click)="questionCardOnTop = !questionCardOnTop"
+    [ngClass]="{ 'top': questionCardOnTop }">
+  </app-card>
+  <app-card-select
+    [cards]="answerCards"
+    [active]="handOnTop"
+    tappable
+    (click)="handOnTop = !handOnTop"
+    (selected)="questionCardOnTop = false"
+    [ngClass]="{ 'top': handOnTop }">
+  </app-card-select>
 </ion-content>

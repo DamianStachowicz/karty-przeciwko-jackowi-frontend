@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Card } from '../../interfaces/card.interface';
-import { CardComponent } from '../../components/card/card.component';
-import { CardSelectPage } from './card-select.page';
+import { CardComponent } from '../card/card.component';
+import { CardSelectComponent } from './card-select.page';
 import { DebugElement } from '@angular/core';
-import { IonicModule, IonSlides } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
-describe('CardSelectPage', () => {
+describe('CardSelectComponent', () => {
   const cards: Card[] = [{
     id: 0,
     text: 'Pudel Ciastek',
@@ -21,13 +21,13 @@ describe('CardSelectPage', () => {
     type: 'answer'
   }];
 
-  let component: CardSelectPage;
-  let fixture: ComponentFixture<CardSelectPage>;
+  let component: CardSelectComponent;
+  let fixture: ComponentFixture<CardSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CardSelectPage,
+        CardSelectComponent,
         CardComponent
       ],
       imports: [
@@ -35,7 +35,7 @@ describe('CardSelectPage', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CardSelectPage);
+    fixture = TestBed.createComponent(CardSelectComponent);
     component = fixture.componentInstance;
     component.cards = cards;
     fixture.detectChanges();

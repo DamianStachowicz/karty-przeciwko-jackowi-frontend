@@ -1,5 +1,5 @@
 import { Card } from '../../interfaces/card.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PlayersService } from 'src/app/services/players/players.service';
 import { Player } from 'src/app/interfaces/player.interface';
 import { take } from 'rxjs/operators';
@@ -9,14 +9,28 @@ import { take } from 'rxjs/operators';
   templateUrl: './current-question.page.html',
   styleUrls: ['./current-question.page.scss'],
 })
-export class CurrentQuestionPage implements OnInit {
+export class CurrentQuestionPage {
   questionCard: Card = {
     id: 0,
     text: 'W przypływie pijackiej szczerości postanowiłem ucałować ___',
     type: 'question'
   };
   players: Player[];
-  questionCardTop: boolean = false;
+  questionCardOnTop: boolean = false;
+  handOnTop: boolean = false;
+  answerCards: Card[] = [{
+    id: 0,
+    text: 'Pudel Ciastek',
+    type: 'answer'
+  }, {
+    id: 1,
+    text: 'Karty Przeciwko Jackowi',
+    type: 'answer'
+  }, {
+    id: 2,
+    text: 'Sucha ryba',
+    type: 'answer'
+  }];
 
   constructor(
     private playersService: PlayersService
@@ -25,8 +39,4 @@ export class CurrentQuestionPage implements OnInit {
       players => this.players = players
     )
   }
-
-  ngOnInit() {
-  }
-
 }

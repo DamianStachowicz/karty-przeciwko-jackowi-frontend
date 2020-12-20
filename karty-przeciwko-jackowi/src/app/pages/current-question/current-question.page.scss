@@ -1,11 +1,18 @@
-app-card {
+app-card, app-card-select {
   height: 90%;
   left: 5%;
   position: absolute;
   right: 5%;
-  top: 33%;
   transition: top 0.7s;
   width: 90%;
+}
+
+app-card {
+  top: 33%;
+}
+
+app-card-select {
+  top: 66%;
 }
 
 app-players-list {
