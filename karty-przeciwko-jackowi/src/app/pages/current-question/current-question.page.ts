@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { PlayersService } from 'src/app/services/players/players.service';
 import { Player } from 'src/app/interfaces/player.interface';
 import { take } from 'rxjs/operators';
+import { I18nService } from 'src/app/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-current-question',
@@ -33,6 +34,7 @@ export class CurrentQuestionPage {
   }];
 
   constructor(
+    public i18n: I18nService,
     private playersService: PlayersService
   ) {
     this.playersService.getPlayers().pipe(take(1)).subscribe(
