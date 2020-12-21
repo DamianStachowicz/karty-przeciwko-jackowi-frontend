@@ -1,16 +1,17 @@
 import { Card } from '../../interfaces/card.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { I18nService } from 'src/app/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() card: Card;
 
-  constructor() { }
-
-  ngOnInit() {}
+  constructor(
+    public i18n: I18nService
+  ) { }
 
 }
