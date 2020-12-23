@@ -1,5 +1,5 @@
-<ion-slides>
+<ion-slides (ionSlideDidChange)="snap($event)" (ionSlideReachEnd)="snap($event)">
   <ion-slide *ngFor="let card of cards">
-  <app-card [card]="card" (click)="select(card)"></app-card>
+    <app-card [card]="card" (click)="select(card)"></app-card>
   </ion-slide>
 </ion-slides>
