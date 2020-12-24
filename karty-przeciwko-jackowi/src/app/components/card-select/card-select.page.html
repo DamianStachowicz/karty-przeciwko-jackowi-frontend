@@ -1,5 +1,10 @@
-<ion-slides>
+<ion-fab vertical="top" horizontal="end" slot="fixed" edge="true" [hidden]="!active">
+  <ion-fab-button color="light">
+    <ion-icon md="caret-down" ios="chevron-down-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-slides [options]="{ width: slideWidth }">
   <ion-slide *ngFor="let card of cards">
-  <app-card [card]="card" (click)="select(card)"></app-card>
+    <app-card [card]="card" (click)="select(card)"></app-card>
   </ion-slide>
 </ion-slides>
