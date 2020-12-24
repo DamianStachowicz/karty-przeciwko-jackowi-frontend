@@ -1,4 +1,4 @@
-<ion-slides (ionSlideDidChange)="snap($event)" (ionSlideReachEnd)="snap($event)">
+<ion-slides [options]="{ width: slideWidth }">
   <ion-slide *ngFor="let card of cards">
     <app-card [card]="card" (click)="select(card)"></app-card>
   </ion-slide>

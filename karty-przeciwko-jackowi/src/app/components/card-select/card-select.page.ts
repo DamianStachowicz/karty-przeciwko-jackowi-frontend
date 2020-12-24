@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from '../../interfaces/card.interface';
 
 @Component({
@@ -7,14 +6,18 @@ import { Card } from '../../interfaces/card.interface';
   templateUrl: './card-select.page.html',
   styleUrls: ['./card-select.page.scss'],
 })
-export class CardSelectComponent {
+export class CardSelectComponent implements OnInit {
   @Input() cards: Card[];
   @Input() active: boolean = false;
   @Output() selected: EventEmitter<Card> = new EventEmitter<Card>();
 
-  @ViewChild(IonSlides) slidesRef: IonSlides;
+  public slideWidth: number; // in px
 
-  constructor() { }
+  constructor() {}
+
+  ngOnInit() {
+    this.slideWidth = window.innerWidth * 0.9;
+  }
 
   select(card: Card) {
     if (!this.active) {
@@ -32,12 +35,5 @@ export class CardSelectComponent {
     if (index > -1) {
       this.cards.splice(index, 1);
     }
-  }
-
-  snap($event) {
-    const srcElement: HTMLElement = $event.target;
-    this.slidesRef.getActiveIndex().then(
-      index => srcElement.firstElementChild.setAttribute('style', `transform: translateX(-${90 * index}%)`)
-    );
   }
 }
