@@ -5,12 +5,17 @@
 </ion-header>
 
 <ion-content [scrollX]="false" [scrollY]="false">
-  <app-players-list [players]="players"></app-players-list>
+  <app-players-list
+    [players]="players"
+    [tsarId]="tsarId"
+    *ngIf="players">
+  </app-players-list>
   <app-card
     [card]="questionCard"
     tappable
     (click)="questionCardOnTop = !questionCardOnTop"
-    [ngClass]="{ 'top': questionCardOnTop }">
+    [ngClass]="{ 'top': questionCardOnTop }"
+    *ngIf="questionCard">
   </app-card>
   <app-card-select
     [cards]="answerCards"
@@ -18,6 +23,7 @@
     tappable
     (click)="handOnTop = !handOnTop"
     (selected)="questionCardOnTop = false"
-    [ngClass]="{ 'top': handOnTop }">
+    [ngClass]="{ 'top': handOnTop }"
+    *ngIf="answerCards">
   </app-card-select>
 </ion-content>

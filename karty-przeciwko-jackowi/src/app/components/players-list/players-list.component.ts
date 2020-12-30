@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Player } from 'src/app/interfaces/player.interface';
 
 @Component({
@@ -6,11 +6,7 @@ import { Player } from 'src/app/interfaces/player.interface';
   templateUrl: './players-list.component.html',
   styleUrls: ['./players-list.component.scss'],
 })
-export class PlayersListComponent implements OnInit {
+export class PlayersListComponent {
   @Input() players: Player[];
-
-  constructor() { }
-
-  ngOnInit() {}
-
+  @Input() tsarId: number;
 }
