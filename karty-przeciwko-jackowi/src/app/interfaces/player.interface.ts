@@ -1,7 +1,6 @@
 export interface Player {
-  id: string;
+  id: number;
   name: string;
   points: number;
-  isActive: boolean;
-  playedCardId: number;
+  pickedACard: boolean;
 }
