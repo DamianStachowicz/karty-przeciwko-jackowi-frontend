@@ -1,4 +1,6 @@
 {
     "cardBottomText": "Cards Against Jack",
-    "question": "Question"
+    "question": "Question",
+    "error": "Error",
+    "defaultError": "An unknown error has occured"
 }
