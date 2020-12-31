@@ -14,5 +14,4 @@ export class CardComponent {
   constructor(
     public i18n: I18nService
   ) { }
-
 }
