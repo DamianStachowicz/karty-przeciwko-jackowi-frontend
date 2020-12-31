@@ -1,4 +1,6 @@
 {
     "cardBottomText": "Karty Przeciwko Jackowi",
-    "question": "Pytanie"
+    "question": "Pytanie",
+    "error": "Błąd",
+    "defaultError": "Wystąpił nieznany błąd"
 }
