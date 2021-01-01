@@ -2,5 +2,7 @@
     "cardBottomText": "Karty Przeciwko Jackowi",
     "question": "Pytanie",
     "error": "Błąd",
-    "defaultError": "Wystąpił nieznany błąd"
+    "defaultError": "Wystąpił nieznany błąd",
+    "currentTsarText": "Carem/carycą został/a ${tsarName}!",
+    "youReATsarText": "Jesteś carem, ${tsarName}! Jesteś carem!"
 }
