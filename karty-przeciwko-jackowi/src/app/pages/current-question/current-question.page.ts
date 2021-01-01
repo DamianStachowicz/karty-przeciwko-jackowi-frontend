@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, AnimationController } from '@ionic/angular';
 import { Card, CardType } from '../../interfaces/card.interface';
 import { Component, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -21,11 +21,14 @@ export class CurrentQuestionPage implements OnDestroy {
   answerCards: Card[];
   tsarId: number;
   interval$: Subscription;
+  tsarAlertShown: boolean = false;
+  yourId: number = 3;
 
   constructor(
     public i18n: I18nService,
     private alertController: AlertController,
-    private gameStateService: GameStateService
+    private animationCtrl: AnimationController,
+    private gameStateService: GameStateService,
   ) {
     this.startStateUpdating();
   }
@@ -36,30 +39,75 @@ export class CurrentQuestionPage implements OnDestroy {
 
   private startStateUpdating() {
     this.interval$ = interval(environment.gameUpdateInterval).subscribe(
-      () => this.gameStateService.getState(12).pipe(take(1)).subscribe(
+      () => this.gameStateService.getState(0).pipe(take(1)).subscribe(
         state => {
           this.questionCard = state.currentBlack;
           this.players = state.players;
           this.answerCards = state.hand.map(card => ({ ...card, type: CardType.ANSWER }));
           this.tsarId = state.czarId
+
+          if (!this.tsarAlertShown) {
+            const tsar = this.players.find(player => player.id === this.tsarId);
+
+            if (!tsar) {
+              error => this.showErrorDialog(error);
+              return;
+            }
+
+            if (tsar.id === this.yourId) {
+              this.showYouReATsarAlert(tsar.name);
+            } else {
+              this.showTsarAlert(tsar.name); 
+            }
+
+            this.tsarAlertShown = true;
+          }
         },
         error => this.showErrorDialog(error)
       )
     );
   }
 
-  private async showErrorDialog(error) {
-    this.interval$.unsubscribe();
-
+  private async displayAlert(header: string, text: string, handler: () => void) {
     const alert = await this.alertController.create({
-      header: this.i18n.get('error'),
-      message: error.message || this.i18n.get('defaultError'),
-      buttons: [{
-        text: 'OK',
-        handler: () => this.startStateUpdating()
-      }]
+      header: header,
+      message: text,
+      buttons: [{ text: 'OK', handler }],
+      enterAnimation: (baseEl: any, opts?: any) => this.animationCtrl
+        .create()
+        .addElement(baseEl.querySelector('.alert-wrapper'))
+        .duration(250)
+        .keyframes([
+          { offset: 0, opacity: '0' },
+          { offset: 1, opacity: '1' }
+      ])
     });
 
     await alert.present();
+  }
+
+  private showErrorDialog(error) {
+    this.interval$.unsubscribe();
+    this.displayAlert(
+      this.i18n.get('error'),
+      error.message || this.i18n.get('defaultError'),
+      () => this.startStateUpdating()
+    );
+  }
+
+  private showTsarAlert(tsarName: string) {
+    this.displayAlert(
+      '',
+      this.i18n.get('currentTsarText').replace('${tsarName}', tsarName),
+      () => {}
+    )
+  }
+
+  private showYouReATsarAlert(tsarName: string) {
+    this.displayAlert(
+      '',
+      this.i18n.get('youReATsarText').replace('${tsarName}', tsarName),
+      () => {}
+    )
   }
 }

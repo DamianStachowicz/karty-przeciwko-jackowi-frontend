@@ -2,5 +2,7 @@
     "cardBottomText": "Cards Against Jack",
     "question": "Question",
     "error": "Error",
-    "defaultError": "An unknown error has occured"
+    "defaultError": "An unknown error has occured",
+    "currentTsarText": "${tsarName} is our new tsar!",
+    "youReATsarText": "You're a tsar, ${tsarName}! You're a tsar!"
 }
