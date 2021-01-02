@@ -22,7 +22,7 @@ export class CurrentQuestionPage implements OnDestroy {
   tsarId: number;
   interval$: Subscription;
   tsarAlertShown: boolean = false;
-  yourId: number = 3;
+  yourId: number = 0;
 
   constructor(
     public i18n: I18nService,

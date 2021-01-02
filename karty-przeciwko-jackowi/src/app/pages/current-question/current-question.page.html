@@ -24,6 +24,6 @@
     (click)="handOnTop = !handOnTop"
     (selected)="questionCardOnTop = false"
     [ngClass]="{ 'top': handOnTop }"
-    *ngIf="answerCards">
+    *ngIf="yourId !== tsarId &&  answerCards">
   </app-card-select>
 </ion-content>
