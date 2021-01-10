@@ -40,9 +40,6 @@ describe('CardComponent', () => {
 
   it('should display the cards text', () => {
     const cardContainer: DebugElement = fixture.debugElement.query(By.css('.card-container'));
-    console.log('=================================================================================================');
-    console.log({ cardContainer });
-    console.log('=================================================================================================');
     expect(cardContainer.nativeElement.innerHTML).toContain(card.text);
   });
 });

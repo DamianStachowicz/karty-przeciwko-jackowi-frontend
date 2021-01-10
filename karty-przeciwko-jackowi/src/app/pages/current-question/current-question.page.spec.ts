@@ -18,6 +18,7 @@ describe('CurrentQuestionPage', () => {
 
     fixture = TestBed.createComponent(CurrentQuestionPage);
     component = fixture.componentInstance;
+    component.interval$.unsubscribe();
     fixture.detectChanges();
   }));
 

@@ -16,13 +16,13 @@ import { take } from 'rxjs/operators';
 export class CurrentQuestionPage implements OnDestroy {
   questionCard: Card;
   players: Player[];
-  questionCardOnTop: boolean = false;
-  handOnTop: boolean = false;
+  questionCardOnTop = false;
+  handOnTop = false;
   answerCards: Card[];
   tsarId: number;
   interval$: Subscription;
-  tsarAlertShown: boolean = false;
-  yourId: number = 0;
+  tsarAlertShown = false;
+  yourId = 0;
 
   constructor(
     public i18n: I18nService,
@@ -44,20 +44,20 @@ export class CurrentQuestionPage implements OnDestroy {
           this.questionCard = state.currentBlack;
           this.players = state.players;
           this.answerCards = state.hand.map(card => ({ ...card, type: CardType.ANSWER }));
-          this.tsarId = state.czarId
+          this.tsarId = state.czarId;
 
           if (!this.tsarAlertShown) {
             const tsar = this.players.find(player => player.id === this.tsarId);
 
             if (!tsar) {
-              error => this.showErrorDialog(error);
+              this.showErrorDialog({});
               return;
             }
 
             if (tsar.id === this.yourId) {
               this.showYouReATsarAlert(tsar.name);
             } else {
-              this.showTsarAlert(tsar.name); 
+              this.showTsarAlert(tsar.name);
             }
 
             this.tsarAlertShown = true;
@@ -70,7 +70,7 @@ export class CurrentQuestionPage implements OnDestroy {
 
   private async displayAlert(header: string, text: string, handler: () => void) {
     const alert = await this.alertController.create({
-      header: header,
+      header,
       message: text,
       buttons: [{ text: 'OK', handler }],
       enterAnimation: (baseEl: any, opts?: any) => this.animationCtrl
@@ -100,7 +100,7 @@ export class CurrentQuestionPage implements OnDestroy {
       '',
       this.i18n.get('currentTsarText').replace('${tsarName}', tsarName),
       () => {}
-    )
+    );
   }
 
   private showYouReATsarAlert(tsarName: string) {
@@ -108,6 +108,6 @@ export class CurrentQuestionPage implements OnDestroy {
       '',
       this.i18n.get('youReATsarText').replace('${tsarName}', tsarName),
       () => {}
-    )
+    );
   }
 }
