@@ -8,7 +8,7 @@ import { Card } from '../../interfaces/card.interface';
 })
 export class CardSelectComponent implements OnInit {
   @Input() cards: Card[];
-  @Input() active: boolean = false;
+  @Input() active = false;
   @Output() selected: EventEmitter<Card> = new EventEmitter<Card>();
 
   public slideWidth: number; // in px
