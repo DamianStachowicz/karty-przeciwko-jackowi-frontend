@@ -14,15 +14,15 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./current-question.page.scss'],
 })
 export class CurrentQuestionPage implements OnDestroy {
-  questionCard: Card;
-  players: Player[];
-  questionCardOnTop = false;
-  handOnTop = false;
-  answerCards: Card[];
-  tsarId: number;
-  interval$: Subscription;
-  tsarAlertShown = false;
-  yourId = 0;
+  public questionCard: Card;
+  public players: Player[];
+  public questionCardOnTop = false;
+  public handOnTop = false;
+  public answerCards: Card[];
+  public tsarId: number;
+  public interval$: Subscription;
+  public tsarAlertShown = false;
+  public yourId = 0;
 
   constructor(
     public i18n: I18nService,
