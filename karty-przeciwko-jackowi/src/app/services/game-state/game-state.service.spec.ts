@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 describe('GameStateService', () => {
   let service: GameStateService;
   const gameState: GameState = {
-    czarId: 0,
+    tsarId: 0,
     players: [],
-    currentBlack: null,
+    black: null,
     hand: []
   };
 

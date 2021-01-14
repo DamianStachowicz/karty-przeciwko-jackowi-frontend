@@ -2,8 +2,8 @@ import { Card } from './card.interface';
 import { Player } from './player.interface';
 
 export interface GameState {
-    czarId: number;
+    tsarId: number;
     players: Player[];
-    currentBlack: Card;
+    black: Card;
     hand: Card[];
 }
