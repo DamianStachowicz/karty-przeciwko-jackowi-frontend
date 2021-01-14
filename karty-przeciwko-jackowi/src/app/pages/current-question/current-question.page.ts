@@ -22,7 +22,7 @@ export class CurrentQuestionPage implements OnDestroy {
   public tsarId: number;
   public interval$: Subscription;
   public tsarAlertShown = false;
-  public yourId = 0;
+  public yourId = 1;
 
   constructor(
     public i18n: I18nService,
@@ -39,12 +39,12 @@ export class CurrentQuestionPage implements OnDestroy {
 
   private startStateUpdating() {
     this.interval$ = interval(environment.gameUpdateInterval).subscribe(
-      () => this.gameStateService.getState(0).pipe(take(1)).subscribe(
+      () => this.gameStateService.getState(1).pipe(take(1)).subscribe(
         state => {
-          this.questionCard = state.currentBlack;
+          this.questionCard = state.black;
           this.players = state.players;
           this.answerCards = state.hand.map(card => ({ ...card, type: CardType.ANSWER }));
-          this.tsarId = state.czarId;
+          this.tsarId = state.tsarId;
 
           if (!this.tsarAlertShown) {
             const tsar = this.players.find(player => player.id === this.tsarId);

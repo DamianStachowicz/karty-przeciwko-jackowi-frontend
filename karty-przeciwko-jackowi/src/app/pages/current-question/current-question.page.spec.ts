@@ -12,7 +12,7 @@ describe('CurrentQuestionPage', () => {
   let component: CurrentQuestionPage;
   let fixture: ComponentFixture<CurrentQuestionPage>;
   const gameState: GameState = {
-    czarId: -1,
+    tsarId: -1,
     players: [{
       id: 0,
       name: 'Jack',
@@ -29,7 +29,7 @@ describe('CurrentQuestionPage', () => {
       points: 12,
       pickedACard: false
     }],
-    currentBlack: null,
+    black: null,
     hand: [{
       id: 0,
       text: 'Lorem ipsum',
@@ -50,12 +50,12 @@ describe('CurrentQuestionPage', () => {
     })
   };
   const gameStateTsar0 = { getState: playerId => new Observable(observer => {
-      observer.next({ ...gameState, czarId: 0 });
+      observer.next({ ...gameState, tsarId: 0 });
       observer.complete();
     })
   };
   const gameStateTsar1 = { getState: playerId => new Observable(observer => {
-      observer.next({ ...gameState, czarId: 1 });
+      observer.next({ ...gameState, tsarId: 1 });
       observer.complete();
     })
   };
