@@ -1,4 +1,3 @@
-import { AlertController, AnimationController } from '@ionic/angular';
 import { Card, CardType } from '../../interfaces/card.interface';
 import { Component, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -7,6 +6,7 @@ import { I18nService } from 'src/app/services/i18n/i18n.service';
 import { interval, Subscription } from 'rxjs';
 import { Player } from 'src/app/interfaces/player.interface';
 import { take } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-current-question',
@@ -26,8 +26,7 @@ export class CurrentQuestionPage implements OnDestroy {
 
   constructor(
     public i18n: I18nService,
-    private alertController: AlertController,
-    private animationCtrl: AnimationController,
+    private alertService: AlertService,
     private gameStateService: GameStateService,
   ) {
     this.startStateUpdating();
@@ -68,27 +67,9 @@ export class CurrentQuestionPage implements OnDestroy {
     );
   }
 
-  private async displayAlert(header: string, text: string, handler: () => void) {
-    const alert = await this.alertController.create({
-      header,
-      message: text,
-      buttons: [{ text: 'OK', handler }],
-      enterAnimation: (baseEl: any, opts?: any) => this.animationCtrl
-        .create()
-        .addElement(baseEl.querySelector('.alert-wrapper'))
-        .duration(250)
-        .keyframes([
-          { offset: 0, opacity: '0' },
-          { offset: 1, opacity: '1' }
-      ])
-    });
-
-    await alert.present();
-  }
-
   private showErrorDialog(error) {
     this.interval$.unsubscribe();
-    this.displayAlert(
+    this.alertService.displayAlert(
       this.i18n.get('error'),
       error.message || this.i18n.get('defaultError'),
       () => this.startStateUpdating()
@@ -96,7 +77,7 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private showTsarAlert(tsarName: string) {
-    this.displayAlert(
+    this.alertService.displayAlert(
       '',
       this.i18n.get('currentTsarText').replace('${tsarName}', tsarName),
       () => {}
@@ -104,7 +85,7 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private showYouReATsarAlert(tsarName: string) {
-    this.displayAlert(
+    this.alertService.displayAlert(
       '',
       this.i18n.get('youReATsarText').replace('${tsarName}', tsarName),
       () => {}
