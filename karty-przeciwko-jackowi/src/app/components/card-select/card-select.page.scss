@@ -7,3 +7,10 @@ ion-slides {
   left: 5%;
   width: 90% !important;
 }
+
+#select-button {
+  bottom: 0;
+  position: fixed;
+  width: 99vw;
+  z-index: 1;
+}

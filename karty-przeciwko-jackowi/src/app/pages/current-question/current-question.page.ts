@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { Card, CardType } from '../../interfaces/card.interface';
 import { Component, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -6,7 +7,6 @@ import { I18nService } from 'src/app/services/i18n/i18n.service';
 import { interval, Subscription } from 'rxjs';
 import { Player } from 'src/app/interfaces/player.interface';
 import { take } from 'rxjs/operators';
-import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-current-question',
@@ -27,9 +27,10 @@ export class CurrentQuestionPage implements OnDestroy {
   constructor(
     public i18n: I18nService,
     private alertService: AlertService,
-    private gameStateService: GameStateService,
+    private gameStateService: GameStateService
   ) {
-    this.startStateUpdating();
+    // todo remove timeout (it's for debugging as there's no loading screen yet)
+    setTimeout(() => this.startStateUpdating(), 3000);
   }
 
   ngOnDestroy() {
@@ -37,33 +38,38 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private startStateUpdating() {
+    this.updateGameState();
     this.interval$ = interval(environment.gameUpdateInterval).subscribe(
-      () => this.gameStateService.getState(1).pipe(take(1)).subscribe(
-        state => {
-          this.questionCard = state.black;
-          this.players = state.players;
-          this.answerCards = state.hand.map(card => ({ ...card, type: CardType.ANSWER }));
-          this.tsarId = state.tsarId;
+      () => this.updateGameState(),
+      error => this.showErrorDialog(error)
+    );
+  }
 
-          if (!this.tsarAlertShown) {
-            const tsar = this.players.find(player => player.id === this.tsarId);
+  private updateGameState() {
+    this.gameStateService.getState(1).pipe(take(1)).subscribe(
+      state => {
+        this.questionCard = state.black;
+        this.players = state.players;
+        this.answerCards = state.hand.map(card => ({ ...card, type: CardType.ANSWER }));
+        this.tsarId = state.tsarId;
 
-            if (!tsar) {
-              this.showErrorDialog({});
-              return;
-            }
+        if (!this.tsarAlertShown) {
+          const tsar = this.players.find(player => player.id === this.tsarId);
 
-            if (tsar.id === this.yourId) {
-              this.showYouReATsarAlert(tsar.name);
-            } else {
-              this.showTsarAlert(tsar.name);
-            }
-
-            this.tsarAlertShown = true;
+          if (!tsar) {
+            this.showErrorDialog({});
+            return;
           }
-        },
-        error => this.showErrorDialog(error)
-      )
+
+          if (tsar.id === this.yourId) {
+            this.showYouReATsarAlert(tsar.name);
+          } else {
+            this.showTsarAlert(tsar.name);
+          }
+
+          this.tsarAlertShown = true;
+        }
+      }
     );
   }
 
@@ -90,5 +96,10 @@ export class CurrentQuestionPage implements OnDestroy {
       this.i18n.get('youReATsarText').replace('${tsarName}', tsarName),
       () => {}
     );
+  }
+
+  hideCards() {
+    this.questionCardOnTop = false;
+    this.handOnTop = false;
   }
 }

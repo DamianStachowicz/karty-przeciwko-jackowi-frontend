@@ -4,5 +4,6 @@
     "error": "Błąd",
     "defaultError": "Wystąpił nieznany błąd",
     "currentTsarText": "Carem/carycą został/a ${tsarName}!",
-    "youReATsarText": "Jesteś carem, ${tsarName}! Jesteś carem!"
+    "youReATsarText": "Jesteś carem, ${tsarName}! Jesteś carem!",
+    "putDownTheCards": "Połóż karty"
 }

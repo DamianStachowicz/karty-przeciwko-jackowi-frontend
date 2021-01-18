@@ -4,5 +4,6 @@
     "error": "Error",
     "defaultError": "An unknown error has occured",
     "currentTsarText": "${tsarName} is our new tsar!",
-    "youReATsarText": "You're a tsar, ${tsarName}! You're a tsar!"
+    "youReATsarText": "You're a tsar, ${tsarName}! You're a tsar!",
+    "putDownTheCards": "Put down the cards"
 }

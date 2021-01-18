@@ -28,4 +28,9 @@
     border-color: black;
     color: #222;
   }
+
+  .highlighted {
+    border-color: var(--ion-color-primary);
+    border-width: 3px;
+  }
 }

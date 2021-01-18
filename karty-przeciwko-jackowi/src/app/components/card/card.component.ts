@@ -9,6 +9,7 @@ import { I18nService } from 'src/app/services/i18n/i18n.service';
 })
 export class CardComponent {
   @Input() card: Card;
+  @Input() highlighted = false;
   cardTypes = CardType;
 
   constructor(

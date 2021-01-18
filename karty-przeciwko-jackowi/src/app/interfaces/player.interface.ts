@@ -2,5 +2,5 @@ export interface Player {
   id: number;
   name: string;
   points: number;
-  pickedACard: boolean;
+  picked: boolean;
 }

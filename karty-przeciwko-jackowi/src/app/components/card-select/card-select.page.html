@@ -1,10 +1,13 @@
 <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true" [hidden]="!active">
-  <ion-fab-button color="light">
+  <ion-fab-button color="light" (click)="close($event)">
     <ion-icon md="caret-down" ios="chevron-down-circle-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 <ion-slides [options]="{ width: slideWidth }">
   <ion-slide *ngFor="let card of cards">
-    <app-card [card]="card" (click)="select(card)"></app-card>
+    <app-card [card]="card" (click)="highlight(card)" [highlighted]="highlighted.includes(card.id)"></app-card>
   </ion-slide>
 </ion-slides>
+<ion-button (click)="select()" id="select-button" [hidden]="!highlightedEnough" slot="fixed" position="bottom">
+  {{ i18n.get('putDownTheCards') }}
+</ion-button>
