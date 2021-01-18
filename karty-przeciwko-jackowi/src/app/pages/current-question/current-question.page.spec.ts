@@ -17,17 +17,17 @@ describe('CurrentQuestionPage', () => {
       id: 0,
       name: 'Jack',
       points: 10,
-      pickedACard: false
+      picked: false
     }, {
       id: 1,
       name: 'Peter',
       points: 5,
-      pickedACard: false
+      picked: false
     }, {
       id: 2,
       name: 'Gollum',
       points: 12,
-      pickedACard: false
+      picked: false
     }],
     black: null,
     hand: [{

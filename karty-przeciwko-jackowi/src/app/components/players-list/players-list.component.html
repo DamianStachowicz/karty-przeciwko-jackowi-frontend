@@ -1,8 +1,8 @@
 <div class="player-list-container">
   <div *ngFor="let player of players" class="player" [ngClass]="{ active: player.id === tsarId }">
     <div class="name">{{ player.name }}</div>
-    <div class="card" *ngIf="player.pickedACard"><span class="icon"></span></div>
-    <app-spinner *ngIf="!player.pickedACard"></app-spinner>
+    <div class="card" *ngIf="player.picked"><span class="icon"></span></div>
+    <app-spinner *ngIf="!player.picked"></app-spinner>
     <div class="points">{{ player.points }}</div>
   </div>
 </div>
