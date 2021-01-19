@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content [scrollX]="false" [scrollY]="false">
+  <ion-spinner *ngIf="loading"></ion-spinner>
   <app-players-list
     [players]="players"
     [tsarId]="tsarId"
