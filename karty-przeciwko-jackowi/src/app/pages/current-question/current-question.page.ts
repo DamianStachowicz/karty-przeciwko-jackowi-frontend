@@ -2,11 +2,11 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 import { Card, CardType } from '../../interfaces/card.interface';
 import { Component, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { finalize, take } from 'rxjs/operators';
 import { GameStateService } from 'src/app/services/game-state/game-state.service';
 import { I18nService } from 'src/app/services/i18n/i18n.service';
 import { interval, Subscription } from 'rxjs';
 import { Player } from 'src/app/interfaces/player.interface';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-current-question',
@@ -23,6 +23,7 @@ export class CurrentQuestionPage implements OnDestroy {
   public interval$: Subscription;
   public tsarAlertShown = false;
   public yourId = 1;
+  public loading = true;
 
   constructor(
     public i18n: I18nService,
@@ -46,7 +47,7 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private updateGameState() {
-    this.gameStateService.getState(1).pipe(take(1)).subscribe(
+    this.gameStateService.getState(1).pipe(take(1), finalize(() => this.loading = false)).subscribe(
       state => {
         this.questionCard = state.black;
         this.players = state.players;
@@ -83,18 +84,14 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private showTsarAlert(tsarName: string) {
-    this.alertService.displayAlert(
-      '',
-      this.i18n.get('currentTsarText').replace('${tsarName}', tsarName),
-      () => {}
+    this.alertService.displayToast(
+      this.i18n.get('currentTsarText').replace('${tsarName}', tsarName)
     );
   }
 
   private showYouReATsarAlert(tsarName: string) {
-    this.alertService.displayAlert(
-      '',
-      this.i18n.get('youReATsarText').replace('${tsarName}', tsarName),
-      () => {}
+    this.alertService.displayToast(
+      this.i18n.get('youReATsarText').replace('${tsarName}', tsarName)
     );
   }
 

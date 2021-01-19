@@ -21,6 +21,14 @@ app-players-list {
   overflow-y: scroll;
 }
 
+ion-spinner {
+  height: 10%;
+  left: 45%;
+  position: absolute;
+  top: 45%;
+  width: 10%
+}
+
 .top {
   top: 5%;
 }
