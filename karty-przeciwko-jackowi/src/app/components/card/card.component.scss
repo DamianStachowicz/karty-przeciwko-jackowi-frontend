@@ -3,8 +3,28 @@
   height: 100%;
   width: 100%;
 
-  .card-container {
+  .border {
     border: 1px solid;
+    border-radius: 8px;
+    border-radius: 1rem;
+    height: 100%;
+    padding: 4px;
+  }
+
+  .highlighted {
+    animation: moveGradient 2s alternate infinite;
+    background: linear-gradient(
+      60deg,
+      var(--ion-color-primary),
+      white
+    );
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border: none;
+    padding: 5px;
+  }
+
+  .card-container {
     border-radius: 1rem;
     height: 100%;
     padding: 2rem;
@@ -21,16 +41,25 @@
     background-color: black;
     border-color: white;
     color: white;
+
+    .card-container {
+      background-color: black;
+    }
   }
 
   .card-answer {
     background-color: white;
-    border-color: black;
+    border-color: #222;
     color: #222;
+
+    .card-container {
+      background-color: white;
+    }
   }
 
-  .highlighted {
-    border-color: var(--ion-color-primary);
-    border-width: 3px;
+  @keyframes moveGradient {
+    50% {
+      background-position: 100% 50%;
+    }
   }
 }
