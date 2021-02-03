@@ -1,10 +1,9 @@
-<div class="border" [ngClass]="{
+<div class="card-container"
+  [ngClass]="{
     'card-question': card.type !== cardTypes.ANSWER,
     'card-answer': card.type === cardTypes.ANSWER,
     'highlighted': highlighted
   }">
-  <div class="card-container">
-    <div class="text">{{ card?.text }}</div>
-    <div class="footer">&#9824; {{ i18n.get('cardBottomText') }}</div>
-  </div>
+  <div class="text">{{ card?.text }}</div>
+  <div class="footer">&#9824; {{ i18n.get('cardBottomText') }}</div>
 </div>
