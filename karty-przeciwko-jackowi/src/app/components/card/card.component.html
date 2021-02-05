@@ -4,6 +4,7 @@
     'card-answer': card.type === cardTypes.ANSWER,
     'highlighted': highlighted
   }">
+  <div class="number" [hidden]="!highlighted || !number">{{ number }}</div>
   <div class="text">{{ card?.text }}</div>
   <div class="footer">&#9824; {{ i18n.get('cardBottomText') }}</div>
 </div>
