@@ -23,6 +23,7 @@ export class CardSelectComponent implements OnInit {
   @Output() onclose: EventEmitter<void> = new EventEmitter<void>();
   highlighted: number[] = [];
   highlightedEnough = false;
+  cardTypes = CardType;
 
   public slideWidth: number; // in px
 

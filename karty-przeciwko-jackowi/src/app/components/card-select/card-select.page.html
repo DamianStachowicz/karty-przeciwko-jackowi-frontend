@@ -5,7 +5,10 @@
 </ion-fab>
 <ion-slides [options]="{ width: slideWidth }">
   <ion-slide *ngFor="let card of cards">
-    <app-card [card]="card" (click)="highlight(card)" [highlighted]="highlighted.includes(card.id)"></app-card>
+    <app-card [card]="card"
+      (click)="highlight(card)" [highlighted]="highlighted.includes(card.id)"
+      [number]="blackType !== cardTypes.PICK_1 && highlighted.indexOf(card.id) + 1"
+    ></app-card>
   </ion-slide>
 </ion-slides>
 <ion-button (click)="select()" id="select-button" [hidden]="!highlightedEnough" slot="fixed" position="bottom">
