@@ -15,18 +15,22 @@
     [card]="questionCard"
     tappable
     (click)="questionCardOnTop = !questionCardOnTop"
-    [ngClass]="{ 'top': questionCardOnTop }"
+    [class.top]="questionCardOnTop"
     *ngIf="questionCard">
   </app-card>
-  <app-card-select
+  <div
+    #hand
+    class="hand"
+    [style.top]="handOnTop ? '5%' : '66%'"
+  >
+    <app-card-select
     [cards]="answerCards"
     [active]="handOnTop"
     [blackType]="questionCard?.type"
     tappable
-    (click)="handOnTop = true"
     (onclose)="handOnTop = false"
     (selected)="hideCards()"
-    [class.top]="handOnTop"
     *ngIf="yourId !== tsarId &&  answerCards">
   </app-card-select>
+  </div>
 </ion-content>

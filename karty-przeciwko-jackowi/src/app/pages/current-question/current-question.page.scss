@@ -7,7 +7,7 @@ app-card {
   width: 90%;
 }
 
-app-card-select {
+.hand {
   height: 90%;
   position: absolute;
   top: 66%;
@@ -19,6 +19,7 @@ app-players-list {
   display: block;
   max-height: 33%;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 ion-spinner {
