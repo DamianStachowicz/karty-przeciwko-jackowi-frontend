@@ -1,4 +1,3 @@
-import { Card, CardType } from '../../interfaces/card.interface';
 import {
   Component,
   EventEmitter,
@@ -6,9 +5,11 @@ import {
   OnInit,
   Output
   } from '@angular/core';
+import { AlertService } from 'src/app/services/alert/alert.service';
+import { Card, CardType } from '../../interfaces/card.interface';
 import { GameStateService, Move } from 'src/app/services/game-state/game-state.service';
 import { I18nService } from 'src/app/services/i18n/i18n.service';
-import { AlertService } from 'src/app/services/alert/alert.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-select',
@@ -72,7 +73,7 @@ export class CardSelectComponent implements OnInit {
     this.selected.emit(this.getHighlightedCards());
     this.highlighted.forEach(id => this.removeFromCards(id));
 
-    this.gameStateService.makeAMove(1, Move.PICK, this.highlighted).subscribe(
+    this.gameStateService.makeAMove(1, Move.PICK, this.highlighted).pipe(take(1)).subscribe(
       () => {
         this.clear();
         this.selected.emit(this.getHighlightedCards());
@@ -92,7 +93,6 @@ export class CardSelectComponent implements OnInit {
   }
 
   private getCardById(id: number) {
-    console.log(this.cards.find(card => card.id = id));
     return this.cards.find(card => card.id = id);
   }
 

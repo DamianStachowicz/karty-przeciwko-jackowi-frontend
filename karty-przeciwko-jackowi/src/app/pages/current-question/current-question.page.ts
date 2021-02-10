@@ -1,6 +1,7 @@
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Card, CardType } from '../../interfaces/card.interface';
-import { Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { DomController, GestureController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { finalize, take } from 'rxjs/operators';
 import { GameStateService } from 'src/app/services/game-state/game-state.service';
@@ -13,7 +14,9 @@ import { Player } from 'src/app/interfaces/player.interface';
   templateUrl: './current-question.page.html',
   styleUrls: ['./current-question.page.scss'],
 })
-export class CurrentQuestionPage implements OnDestroy {
+export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
+  @ViewChild('hand', { read: ElementRef }) hand: ElementRef;
+
   public questionCard: Card;
   public players: Player[];
   public questionCardOnTop = false;
@@ -28,7 +31,9 @@ export class CurrentQuestionPage implements OnDestroy {
   constructor(
     public i18n: I18nService,
     private alertService: AlertService,
-    private gameStateService: GameStateService
+    private domCtrl: DomController,
+    private gameStateService: GameStateService,
+    private gestureCtrl: GestureController
   ) {
     // todo remove timeout (it's for debugging as there's no loading screen yet)
     setTimeout(() => this.startStateUpdating(), 3000);
@@ -36,6 +41,60 @@ export class CurrentQuestionPage implements OnDestroy {
 
   ngOnDestroy() {
     this.interval$.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+    this.domCtrl.read(() => this.setupGesture());
+  }
+
+  private setupGesture() {
+    let handTop = 0;
+    let transition = 'top 0.7s';
+
+    const moveGesture = this.gestureCtrl.create({
+      el: this.hand.nativeElement,
+      threshold: 0,
+      gestureName: 'move',
+      onStart: ev => {
+        handTop = this.getTop(this.hand.nativeElement);
+        transition = this.hand.nativeElement.style.transition;
+
+        this.hand.nativeElement.style.transition = 'none';
+      },
+      onMove: ev => { this.hand.nativeElement.style.top = `${handTop + ev.deltaY}px`; },
+      onEnd: ev => {
+        this.hand.nativeElement.style.transition = transition;
+
+        const threshold = window.innerHeight / 4;
+        if (this.handOnTop) {
+          if (ev.deltaY > threshold) {
+            this.handOnTop = false;
+            this.hand.nativeElement.style.top = '66%';
+          } else if (ev.deltaY !== 0) {
+            this.handOnTop = false;
+            this.hand.nativeElement.style.top = '66%';
+          }
+        } else {
+          if (ev.deltaY < -threshold || ev.deltaY === 0) {
+            this.handOnTop = true;
+            this.hand.nativeElement.style.top = '5%';
+          } else if (ev.deltaY === 0) {
+            this.handOnTop = true;
+            this.hand.nativeElement.style.top = '5%';
+          } else {
+            this.handOnTop = false;
+            this.hand.nativeElement.style.top = '66%';
+          }
+        }
+      }
+    });
+
+    moveGesture.enable(true);
+  }
+
+  private getTop(element: HTMLElement): number {
+    const top = window.getComputedStyle(element).top;
+    return +top.slice(0, top.length - 2);
   }
 
   private startStateUpdating() {
@@ -47,7 +106,7 @@ export class CurrentQuestionPage implements OnDestroy {
   }
 
   private updateGameState() {
-    this.gameStateService.getState(1).pipe(take(1), finalize(() => this.loading = false)).subscribe(
+    this.gameStateService.getState(0).pipe(take(1), finalize(() => this.loading = false)).subscribe(
       state => {
         this.questionCard = state.black;
         this.players = state.players;
@@ -95,7 +154,7 @@ export class CurrentQuestionPage implements OnDestroy {
     );
   }
 
-  hideCards() {
+hideCards() {
     this.questionCardOnTop = false;
     this.handOnTop = false;
   }
