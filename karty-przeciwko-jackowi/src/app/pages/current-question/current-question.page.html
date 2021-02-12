@@ -11,13 +11,18 @@
     [tsarId]="tsarId"
     *ngIf="players">
   </app-players-list>
-  <app-card
-    [card]="questionCard"
-    tappable
-    (click)="questionCardOnTop = !questionCardOnTop"
-    [class.top]="questionCardOnTop"
-    *ngIf="questionCard">
-  </app-card>
+  <div
+    #question
+    class="question"
+    [style.top]="questionCardOnTop ? '5%' : '33%'"
+  >
+    <app-card
+      [card]="questionCard"
+      tappable
+      (click)="questionCardOnTop = !questionCardOnTop"
+      *ngIf="questionCard">
+    </app-card>
+  </div>
   <div
     #hand
     class="hand"
