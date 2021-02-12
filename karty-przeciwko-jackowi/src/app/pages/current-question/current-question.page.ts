@@ -1,6 +1,12 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild
+  } from '@angular/core';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Card, CardType } from '../../interfaces/card.interface';
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { DomController, GestureController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { finalize, take } from 'rxjs/operators';
@@ -8,6 +14,7 @@ import { GameStateService } from 'src/app/services/game-state/game-state.service
 import { I18nService } from 'src/app/services/i18n/i18n.service';
 import { interval, Subscription } from 'rxjs';
 import { Player } from 'src/app/interfaces/player.interface';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
   selector: 'app-current-question',
@@ -16,6 +23,7 @@ import { Player } from 'src/app/interfaces/player.interface';
 })
 export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
   @ViewChild('hand', { read: ElementRef }) hand: ElementRef;
+  @ViewChild('question', { read: ElementRef }) question: ElementRef;
 
   public questionCard: Card;
   public players: Player[];
@@ -44,10 +52,13 @@ export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.domCtrl.read(() => this.setupGesture());
+    this.domCtrl.read(() => {
+      this.setupHandGesture();
+      this.setupQuestionGesture();
+    });
   }
 
-  private setupGesture() {
+  private setupHandGesture() {
     let handTop = 0;
     let transition = 'top 0.7s';
 
@@ -56,7 +67,7 @@ export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
       threshold: 0,
       gestureName: 'move',
       onStart: ev => {
-        handTop = this.getTop(this.hand.nativeElement);
+        handTop = UtilsService.cssGetTopPx(this.hand.nativeElement);
         transition = this.hand.nativeElement.style.transition;
 
         this.hand.nativeElement.style.transition = 'none';
@@ -92,9 +103,53 @@ export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
     moveGesture.enable(true);
   }
 
-  private getTop(element: HTMLElement): number {
-    const top = window.getComputedStyle(element).top;
-    return +top.slice(0, top.length - 2);
+  private setupQuestionGesture() {
+    let questionTop = 0;
+    let transition = 'top 0.7s';
+
+    const moveGesture = this.gestureCtrl.create({
+      el: this.question.nativeElement,
+      threshold: 0,
+      gestureName: 'move',
+      onStart: ev => {
+        questionTop = UtilsService.cssGetTopPx(this.question.nativeElement);
+        transition = this.question.nativeElement.style.transition;
+
+        this.question.nativeElement.style.transition = 'none';
+      },
+      onMove: ev => { this.question.nativeElement.style.top = `${questionTop + ev.deltaY}px`; },
+      onEnd: ev => {
+        this.question.nativeElement.style.transition = transition;
+
+        const threshold = window.innerHeight / 8;
+        if (this.questionCardOnTop) {
+          if (ev.deltaY < -threshold || ev.deltaY === 0) {
+            this.questionCardOnTop = false;
+            this.question.nativeElement.style.top = '33%';
+          }
+          if (ev.deltaY > threshold) {
+            this.questionCardOnTop = false;
+            this.question.nativeElement.style.top = '33%';
+          } else if (ev.deltaY !== 0) {
+            this.questionCardOnTop = false;
+            this.question.nativeElement.style.top = '33%';
+          }
+        } else {
+          if (ev.deltaY < -threshold || ev.deltaY === 0) {
+            this.questionCardOnTop = true;
+            this.question.nativeElement.style.top = '5%';
+          } else if (ev.deltaY === 0) {
+            this.questionCardOnTop = true;
+            this.question.nativeElement.style.top = '5%';
+          } else {
+            this.questionCardOnTop = false;
+            this.question.nativeElement.style.top = '33%';
+          }
+        }
+      }
+    });
+
+    moveGesture.enable(true);
   }
 
   private startStateUpdating() {
@@ -154,7 +209,7 @@ export class CurrentQuestionPage implements AfterViewInit, OnDestroy {
     );
   }
 
-hideCards() {
+  hideCards() {
     this.questionCardOnTop = false;
     this.handOnTop = false;
   }

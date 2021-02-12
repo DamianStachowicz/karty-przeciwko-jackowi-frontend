@@ -24,3 +24,12 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: 'Gidole';
+    src: url(assets/fonts/Gidole-Regular.otf);
+}
+
+* {
+    font-family: 'Gidole' !important;
+}

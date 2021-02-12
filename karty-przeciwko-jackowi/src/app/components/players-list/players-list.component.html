@@ -2,7 +2,7 @@
   <div *ngFor="let player of players" class="player" [ngClass]="{ active: player.id === tsarId }">
     <div class="name">{{ player.name }}</div>
     <div class="card" *ngIf="player.picked"><span class="icon"></span></div>
-    <ion-spinner *ngIf="!player.picked"></ion-spinner>
+    <ion-spinner name="crescent" *ngIf="!player.picked"></ion-spinner>
     <div class="points">{{ player.points }}</div>
   </div>
 </div>
